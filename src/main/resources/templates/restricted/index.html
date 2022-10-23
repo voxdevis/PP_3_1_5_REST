@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Person List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Person List</h1>
+<a href="restricted/addUser">Add Person</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>E-mail</th>
+            <th>Age</th>
+        </tr>
+        <tr th:each ="user : ${users}">
+            <td> <a th:href= "@{/{id}(id=${user.getId()})}" th:utext ="${user.getId()}">Id</a></td>
+            <td th:utext="${user.firstName}">...</td>
+            <td th:utext="${user.lastName}">...</td>
+            <td th:utext="${user.email}">...</td>
+            <td th:utext="${user.age}">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
