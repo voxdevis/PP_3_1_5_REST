@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.controller;
+package ru.kata.spring.boot_security.demo.dao.controller;
 
 
 import ru.kata.spring.boot_security.demo.model.User;
@@ -24,14 +24,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    //@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+
     @GetMapping()
     public String workScreen(ModelMap model) {
         List<User> users = userService.showAll();
         model.addAttribute("users", users);
-        return "index";
+        return "allUsers";
     }
-    //@RequestMapping(value = { "/addUser" }, method = RequestMethod.GET)
+
     @GetMapping("/addUser")
     public String addUser(Model model) {
 
@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping()
     public String create(@ModelAttribute("user") User user) {
         userService.save(user);
-        return "redirect:/";
+        return "redirect:restricted/";
     }
 
     @GetMapping("/{id}")
@@ -62,13 +62,13 @@ public class UserController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         userService.update(id, user);
-        return "redirect:/";
+        return "redirect:restricted/";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.delete(id);
-        return "redirect:/";
+        return "redirect:restricted/";
     }
 
 }
