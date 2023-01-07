@@ -1,8 +1,8 @@
-package ru.kata.spring.boot_security.demo.dao.controller;
+package io.voxdevis.springboot_security.controller;
 
 
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserService;
+import io.voxdevis.springboot_security.entity.User;
+import io.voxdevis.springboot_security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ public class UserController {
     public String workScreen(ModelMap model) {
         List<User> users = userService.showAll();
         model.addAttribute("users", users);
-        return "allUsers";
+        return "restricted/allUsers";
     }
 
     @GetMapping("/addUser")
@@ -60,8 +60,8 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.update(id, user);
+    public String update(@ModelAttribute("user") User user) {
+        userService.update(user);
         return "redirect:restricted/";
     }
 
