@@ -15,7 +15,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Size(min=2, message = "Не меньше 5 знаков")
     private String username;
@@ -41,15 +41,27 @@ public class User implements UserDetails {
     @Column(name = "age")
     private byte age;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public User() {
+    }
+
+    public User(Long id, String username, String password, String passwordConfirm, Set<Role> roles, String firstName, String lastName, String email, byte age) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.passwordConfirm = passwordConfirm;
+        this.roles = roles;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
     }
 
     public User(String firstName, String lastName, String email, byte age) {
@@ -109,27 +121,28 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public Set<Role> getRoles() {
         return roles;
     }
+
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;

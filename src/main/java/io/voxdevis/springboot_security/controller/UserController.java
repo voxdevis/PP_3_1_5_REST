@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -24,51 +25,16 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping()
-    public String workScreen(ModelMap model) {
-        List<User> users = userService.showAll();
-        model.addAttribute("users", users);
-        return "restricted/allUsers";
-    }
-
-    @GetMapping("/addUser")
-    public String addUser(Model model) {
-
-         model.addAttribute("user", new User());
-
-        return "restricted/addUser";
+    public String index() {
+        return "index";
     }
 
 
-    @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
-        userService.save(user);
-        return "redirect:restricted/";
-    }
-
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.show(id));
-        return "restricted/card";
-    }
-
-    @GetMapping(value = "/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.show(id));
-        return "restricted/edit";
-    }
-
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user) {
-        userService.update(user);
-        return "redirect:restricted/";
-    }
-
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        userService.delete(id);
-        return "redirect:restricted/";
+    @GetMapping("/user")
+    public String pageForUser (Model model, Principal principal) {
+        model.addAttribute("user", userService.loadUserByUsername(principal.getName()));
+        return "user";
     }
 
 }
