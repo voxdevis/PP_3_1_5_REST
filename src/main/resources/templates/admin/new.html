@@ -14,7 +14,7 @@
    would be @{/edit.html}
    -->
 
-<form th:action="@{/}"
+<form th:action="@{/admin/}"
       th:object="${user}" method="POST">
 
   <label for="username">Username </label>
@@ -64,10 +64,7 @@
 
 <!-- Check if errorMessage is not null and not empty -->
 
-<div th:if="${errorMessage}" th:utext="${errorMessage}"
-     style="color:red;font-style:italic;">
-  ...
-</div>
+
 </br>
 <button class="buttonLogout" onclick="window.location.href = '/logout';">LOGOUT!</button>
 </body>

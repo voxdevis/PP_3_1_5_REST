@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
+@Transactional
 public class AdminController {
 
     @Autowired
@@ -23,56 +24,55 @@ public class AdminController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @GetMapping("/admin")
-    public String workScreen(ModelMap model) {
+    @GetMapping("/")
+    public String adminPanel(ModelMap model) {
         List<User> users = userService.showAll();
         model.addAttribute("users", users);
-        return "admin/allUsers";
+        return "admin/index";
     }
 
-    @GetMapping("/addUser")
-    public String addUser(Model model) {
+    @GetMapping("/new")
+    public String newUser(Model model) {
 
         model.addAttribute("user", new User());
 
-        List<Role> roles = (List<Role>) roleRepository.findAll();
+        List<Role> roles = roleRepository.findAll();
         model.addAttribute("allRoles", roles);
 
-        return "admin/addUser";
+        return "admin/new";
     }
 
-    @GetMapping("/admin/{id}")
+    @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.show(id));
-        return "admin/card";
+        return "admin/show";
     }
 
     @PostMapping()
     public String create(@ModelAttribute("user") User user) {
         userService.save(user);
-        return "redirect:/admin";
+        return "redirect:/admin/";
     }
 
-    @Transactional
-    @GetMapping(value = "/admin/{id}/edit")
+    @GetMapping(value = "/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.show(id));
-        List<Role> roles = (List<Role>) roleRepository.findAll();
+        List<Role> roles = roleRepository.findAll();
         model.addAttribute("allRoles", roles);
         return "admin/edit";
     }
 
-    @Transactional
-    @PatchMapping("/admin/{id}")
+
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
         userService.update(user);
-        return "redirect:/admin";
+        return "redirect:/admin/";
     }
 
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.delete(id);
-        return "redirect:/admin";
+        return "redirect:/admin/";
     }
 
 

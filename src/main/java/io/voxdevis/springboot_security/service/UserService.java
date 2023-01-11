@@ -1,84 +1,22 @@
 package io.voxdevis.springboot_security.service;
 
-
-import io.voxdevis.springboot_security.entity.Role;
 import io.voxdevis.springboot_security.entity.User;
-import io.voxdevis.springboot_security.repository.RoleRepository;
-import io.voxdevis.springboot_security.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Repository;
 
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-@Repository
-public class UserService implements UserDetailsService {
+public interface UserService extends UserDetailsService {
 
+    List<User> showAll();
 
-    @PersistenceContext
-    private EntityManager entityManager;
+     User show(Long userId);
 
-    @Autowired
-    UserRepository userRepository;
+     void save(User user);
 
-    @Autowired
-    RoleRepository roleRepository;
+    void update(User updatedUser);
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    void delete(Long id);
 
-    public List<User> showAll() {
-        return userRepository.findAll();
-    }
-
-
-    public User show(Long userId) {
-
-        Optional<User> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new User());
-    }
-
-
-    public void save(User user) {
-
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-
-    }
-
-
-    public void update(User updatedUser) {
-        entityManager.merge(updatedUser);
-        entityManager.flush();
-    }
-
-
-    public void delete(Long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        return user;
-    }
-    public List<User> usergtList(Long idMin) {
-        return entityManager.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
-    }
-
+    UserDetails loadUserByUsername(String username);
 }
