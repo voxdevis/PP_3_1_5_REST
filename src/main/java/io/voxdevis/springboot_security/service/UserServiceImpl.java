@@ -3,14 +3,12 @@ package io.voxdevis.springboot_security.service;
 
 
 import io.voxdevis.springboot_security.entity.User;
-import io.voxdevis.springboot_security.repository.RoleRepository;
 import io.voxdevis.springboot_security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 
@@ -18,15 +16,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
