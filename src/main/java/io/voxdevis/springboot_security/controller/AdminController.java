@@ -4,7 +4,7 @@ import io.voxdevis.springboot_security.entity.Role;
 import io.voxdevis.springboot_security.entity.User;
 import io.voxdevis.springboot_security.service.RoleService;
 import io.voxdevis.springboot_security.service.UserService;
-import org.hibernate.Hibernate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +27,6 @@ public class AdminController {
     @GetMapping("/")
     public String adminPanel(ModelMap model) {
         List<User> users = userService.showAll();
-
         model.addAttribute("users", users);
         return "admin/index";
     }
@@ -49,7 +48,7 @@ public class AdminController {
         return "admin/show";
     }
 
-    @PostMapping()
+    @PostMapping("/")
     public String create(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/admin/";
