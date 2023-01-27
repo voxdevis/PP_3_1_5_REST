@@ -1,6 +1,6 @@
-package io.voxdevis.springboot_security.configs;
+package io.voxdevis.springbootstrap.configs;
 
-import io.voxdevis.springboot_security.service.UserService;
+import io.voxdevis.springbootstrap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

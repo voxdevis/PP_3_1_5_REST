@@ -1,4 +1,4 @@
-package io.voxdevis.springboot_security;
+package io.voxdevis.springbootstrap;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

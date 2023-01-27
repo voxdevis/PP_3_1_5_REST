@@ -1,4 +1,4 @@
-package io.voxdevis.springboot_security.configs;
+package io.voxdevis.springbootstrap.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

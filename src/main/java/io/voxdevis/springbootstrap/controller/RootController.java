@@ -1,4 +1,4 @@
-package io.voxdevis.springboot_security.controller;
+package io.voxdevis.springbootstrap.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

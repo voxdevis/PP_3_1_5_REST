@@ -1,6 +1,6 @@
-package io.voxdevis.springboot_security.repository;
+package io.voxdevis.springbootstrap.repository;
 
-import io.voxdevis.springboot_security.entity.User;
+import io.voxdevis.springbootstrap.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
