@@ -1,6 +1,7 @@
 package io.voxdevis.springbootstrap.controller;
 
 
+import io.voxdevis.springbootstrap.entity.User;
 import io.voxdevis.springbootstrap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,17 +15,19 @@ import java.security.Principal;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+
     private final UserService userService;
 
-
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/")
     public String pageForUser (Model model, Principal principal) {
-        model.addAttribute("user", userService.loadUserByUsername(principal.getName()));
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("roles", user.getRoles());
         return "user/index";
     }
 

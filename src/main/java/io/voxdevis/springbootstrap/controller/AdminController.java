@@ -1,6 +1,6 @@
 package io.voxdevis.springbootstrap.controller;
 
-import io.voxdevis.springbootstrap.entity.Role;
+
 import io.voxdevis.springbootstrap.entity.User;
 import io.voxdevis.springbootstrap.service.RoleService;
 import io.voxdevis.springbootstrap.service.UserService;
@@ -8,72 +8,54 @@ import io.voxdevis.springbootstrap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.security.Principal;
+
 
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
+
     private UserService userService;
 
-    @Autowired
+
     private RoleService roleService;
 
+    @Autowired
+    public AdminController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
+
     @GetMapping("/")
-    public String adminPanel(ModelMap model) {
-        List<User> users = userService.showAll();
-        model.addAttribute("users", users);
+    public String adminPanel(Model model, Principal principal, @ModelAttribute("user") User user) {
+        model.addAttribute("admin", userService.findUserByEmail(principal.getName()));
+        model.addAttribute("users", userService.showAll());
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("newUser", new User());
+
         return "admin/index";
     }
-
-    @GetMapping("/new")
-    public String newUser(Model model) {
-
-        model.addAttribute("user", new User());
-
-        List<Role> roles = roleService.findAll();
-        model.addAttribute("allRoles", roles);
-
-        return "admin/new";
+    @DeleteMapping("/{id}")
+    public String deleteUserById(@PathVariable("id") long id) {
+        userService.delete(id);
+        return "redirect:/admin/";
     }
 
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.show(id));
-        return "admin/show";
-    }
-
-    @PostMapping("/")
+    @PostMapping()
     public String create(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/admin/";
     }
-
-    @GetMapping(value = "/{id}/edit")
-    public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.show(id));
-        List<Role> roles = roleService.findAll();
-        model.addAttribute("allRoles", roles);
-        return "admin/edit";
-    }
-
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/admin/";
     }
-
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        userService.delete(id);
-        return "redirect:/admin/";
-    }
-
 
 }

@@ -17,10 +17,19 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min=2, message = "Не меньше 5 знаков")
-    private String username;
+    @Column(name = "name")
+    private String firstName;
 
-    @Size(min=2, message = "Не меньше 5 знаков")
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "age")
+    private byte age;
+
+    @Column(name = "email")
+    private String email;
+
+    @Size(min=5, message = "Не меньше 5 знаков")
     private String password;
 
     @Transient
@@ -28,18 +37,6 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
-
-    @Column(name = "name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "age")
-    private byte age;
 
     public Long getId() {
         return id;
@@ -54,8 +51,7 @@ public class User implements UserDetails {
 
     public User(Long id, String username, String password, String passwordConfirm, Set<Role> roles, String firstName, String lastName, String email, byte age) {
         this.id = id;
-        this.username = username;
-        this.password = password;
+         this.password = password;
         this.passwordConfirm = passwordConfirm;
         this.roles = roles;
         this.firstName = firstName;
@@ -116,7 +112,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -157,7 +153,7 @@ public class User implements UserDetails {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.email = username;
     }
 
     public void setPassword(String password) {
