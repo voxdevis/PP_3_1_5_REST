@@ -2,20 +2,17 @@ package io.voxdevis.springbootstrap.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
-public class RootController {
+public class LoginController {
 
     @GetMapping("/")
     public String startPage() {
-        return "index";
+        return "/login/index";
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "index";
+    public String loginPage() {
+        return "/login/index";
     }
-
 }

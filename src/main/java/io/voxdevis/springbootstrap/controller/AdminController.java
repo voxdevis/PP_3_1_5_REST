@@ -31,7 +31,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String adminPanel(Model model, Principal principal, @ModelAttribute("user") User user) {
         model.addAttribute("admin", userService.findUserByEmail(principal.getName()));
         model.addAttribute("users", userService.showAll());
