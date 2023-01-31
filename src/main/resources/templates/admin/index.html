@@ -11,7 +11,7 @@
 <header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
     <div class="container-fluid d-flex align-items-center">
         <h1 class="d-flex align-items-center fs-4 text-white mb-0"
-            th:text="${admin.getUsername()} +' with roles: '+ ${admin.getRoles()}">
+            th:text="${admin.getUsername()} +' with roles: '+ ${admin.getRolesToOneLineString()}">
         </h1>
         <a th:href="@{/logout}" class="ms-auto link-secondary text-decoration-none" hreflang="ar">Logout</a>
     </div>
@@ -79,7 +79,7 @@
                                     <td th:text="${user.getFirstName()}"></td>
                                     <td th:text="${user.getLastName()}"></td>
                                     <td th:text="${user.getUsername()}"></td>
-                                    <td th:text="${user.getRoles()}"></td>
+                                    <td th:text="${user.getRolesToOneLineString()}"></td>
                                     <td>
                                         <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                                 data-bs-target="#modalEdit"
@@ -360,7 +360,7 @@
                                     <td th:text="${admin.getFirstName()}"></td>
                                     <td th:text="${admin.getLastName()}"></td>
                                     <td th:text="${admin.getUsername()}"></td>
-                                    <td th:text="${admin.getRoles()}"></td>
+                                    <td th:text="${admin.getRolesToOneLineString()}"></td>
                                 </tr>
                                 </tbody>
                             </table>
