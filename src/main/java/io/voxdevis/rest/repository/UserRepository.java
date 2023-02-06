@@ -1,6 +1,6 @@
-package io.voxdevis.springbootstrap.repository;
+package io.voxdevis.rest.repository;
 
-import io.voxdevis.springbootstrap.entity.User;
+import io.voxdevis.rest.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

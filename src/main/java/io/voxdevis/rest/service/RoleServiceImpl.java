@@ -1,7 +1,7 @@
-package io.voxdevis.springbootstrap.service;
+package io.voxdevis.rest.service;
 
-import io.voxdevis.springbootstrap.entity.Role;
-import io.voxdevis.springbootstrap.repository.RoleRepository;
+import io.voxdevis.rest.entity.Role;
+import io.voxdevis.rest.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

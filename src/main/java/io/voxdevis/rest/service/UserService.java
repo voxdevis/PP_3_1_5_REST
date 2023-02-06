@@ -1,6 +1,6 @@
-package io.voxdevis.springbootstrap.service;
+package io.voxdevis.rest.service;
 
-import io.voxdevis.springbootstrap.entity.User;
+import io.voxdevis.rest.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

@@ -1,4 +1,4 @@
-package io.voxdevis.springbootstrap.configs;
+package io.voxdevis.rest.configs;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

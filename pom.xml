@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.voxdevis</groupId>
-	<artifactId>springboot_security</artifactId>
+	<artifactId>rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>webCRUDBoot</name>
+	<name>REST</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>

@@ -1,9 +1,9 @@
-package io.voxdevis.springbootstrap.service;
+package io.voxdevis.rest.service;
 
 
 
-import io.voxdevis.springbootstrap.entity.User;
-import io.voxdevis.springbootstrap.repository.UserRepository;
+import io.voxdevis.rest.entity.User;
+import io.voxdevis.rest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

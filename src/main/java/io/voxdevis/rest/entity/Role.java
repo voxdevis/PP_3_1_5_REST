@@ -1,4 +1,4 @@
-package io.voxdevis.springbootstrap.entity;
+package io.voxdevis.rest.entity;
 
 
 import org.springframework.security.core.GrantedAuthority;

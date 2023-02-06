@@ -1,6 +1,6 @@
-package io.voxdevis.springbootstrap.configs;
+package io.voxdevis.rest.configs;
 
-import io.voxdevis.springbootstrap.service.UserService;
+import io.voxdevis.rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/users/**").hasRole("ADMIN")
+                .antMatchers("/api/roles/**").hasRole("ADMIN")
+                .antMatchers("/api/auth").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -1,10 +1,10 @@
-package io.voxdevis.springbootstrap;
+package io.voxdevis.rest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootSecurityDemoApplicationTests {
+class RestApplicationTests {
 
 	@Test
 	void contextLoads() {
