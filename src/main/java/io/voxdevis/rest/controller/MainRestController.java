@@ -29,17 +29,14 @@ public class MainRestController {
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.showAll();
-        return ((users != null) && (!users.isEmpty()))
-                ? new ResponseEntity<>(users, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         User user = userService.show(id);
-        return (user != null)
-                ? new ResponseEntity<>(user, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+
     }
 
     @PostMapping("/users")
@@ -51,18 +48,12 @@ public class MainRestController {
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long id) {
         user.setId(id);
-        if (userService.show(id) == null) {
-            return new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
-        }
         userService.update(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id) {
-        if (userService.show(id) == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -75,17 +66,13 @@ public class MainRestController {
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getAllRoles() {
         List<Role> roles = roleService.findAll();
-        return ((roles != null) && (!roles.isEmpty()))
-                ? new ResponseEntity<>(roles, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(roles, HttpStatus.OK);
+
     }
 
     @GetMapping("/roles/{id}")
     public ResponseEntity<List<Role>> getRolesById(@PathVariable Long id) {
         User user = userService.show(id);
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(user.getRoles(), HttpStatus.OK);
     }
 }
